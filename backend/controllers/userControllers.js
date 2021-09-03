@@ -56,7 +56,7 @@ const loginUser = async (req, res) => {
          res.status(404).send("User not found");
       }
    } catch (error) {
-      res.send(error);
+      res.send(error.message);
    }
 };
 
