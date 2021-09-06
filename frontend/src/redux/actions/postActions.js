@@ -6,6 +6,12 @@ export const getPost = () => async (dispatch) => {
 
       dispatch({ type: "GET_POST_SUCCESS", payload: data });
    } catch (error) {
-      dispatch({ type: "GET_POST_FAIL", payload: error });
+      dispatch({
+         type: "GET_POST_FAIL",
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
+      });
    }
 };

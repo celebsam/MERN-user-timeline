@@ -15,6 +15,12 @@ export const loginAction = (loginInfo) => async (dispatch) => {
       dispatch({ type: "LOGIN_REQUEST_SUCCESS", payload: data });
       localStorage.setItem("timelineUserInfo", JSON.stringify(data));
    } catch (error) {
-      dispatch({ type: "LOGIN_REQUEST_FAIL", payload: error });
+      dispatch({
+         type: "LOGIN_REQUEST_FAIL",
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
+      });
    }
 };
