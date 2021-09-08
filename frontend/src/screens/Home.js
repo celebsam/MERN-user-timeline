@@ -16,9 +16,11 @@ const Home = () => {
             Welcome to user timeline
          </h1>
          <div>
-            <button className="btn btn-primary btn-lg mx-3 mt-3">
-               Register
-            </button>
+            <Link to="/register">
+               <button className="btn btn-primary btn-lg mx-3 mt-3">
+                  Register
+               </button>
+            </Link>
             <Link to="/login">
                <button className="btn btn-info btn-lg mx-3 mt-3">Login</button>
             </Link>

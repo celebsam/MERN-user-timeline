@@ -24,3 +24,17 @@ export const loginAction = (loginInfo) => async (dispatch) => {
       });
    }
 };
+
+const registerAction = (userDetails) => async (dispatch) => {
+   try {
+      dispatch({ type: "REGISTER_REQUEST" });
+   } catch (error) {
+      dispatch({
+         type: "REGISTER_REQUEST_FAIL",
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
+      });
+   }
+};
