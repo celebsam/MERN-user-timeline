@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Container, Form, Spinner } from "react-bootstrap";
+import { registerAction } from "../redux/actions/userActions";
 
 const Register = () => {
    const [email, setEmail] = useState("");
@@ -7,9 +9,18 @@ const Register = () => {
    const [firstname, setFirstname] = useState("");
    const [lastname, setLastname] = useState("");
    const [message, setMessage] = useState("");
-   const [loading, setloading] = useState(false);
 
-   //  const dispatch = useDispatch();
+   const register = useSelector((state) => state.register);
+
+   const { loading } = register;
+
+   const dispatch = useDispatch();
+
+   const registerHandler = (e) => {
+      e.preventDefault();
+      dispatch(registerAction({ firstname, lastname, email, password }));
+   };
+
    return (
       <div>
          <Container>
@@ -67,7 +78,11 @@ const Register = () => {
                      <span className="visually-hidden">Loading...</span>
                   </Spinner>
                ) : (
-                  <Button variant="primary" type="submit">
+                  <Button
+                     variant="primary"
+                     type="submit"
+                     onClick={registerHandler}
+                  >
                      Login
                   </Button>
                )}

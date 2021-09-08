@@ -25,9 +25,15 @@ export const loginAction = (loginInfo) => async (dispatch) => {
    }
 };
 
-const registerAction = (userDetails) => async (dispatch) => {
+export const registerAction = (userDetails) => async (dispatch) => {
    try {
       dispatch({ type: "REGISTER_REQUEST" });
+
+      const config = { headers: { "Content-Type": "application/json" } };
+
+      const { data } = axios.post("/api/user/register", userDetails, config);
+
+      dispatch({ type: "REGISTER_REQUEST_SUCCESS", payload: data });
    } catch (error) {
       dispatch({
          type: "REGISTER_REQUEST_FAIL",
