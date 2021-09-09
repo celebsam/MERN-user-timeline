@@ -8,7 +8,7 @@ const Register = () => {
    const [password, setPassword] = useState("");
    const [firstname, setFirstname] = useState("");
    const [lastname, setLastname] = useState("");
-   const [message, setMessage] = useState("");
+   // const [message, setMessage] = useState("");
 
    const register = useSelector((state) => state.register);
 
