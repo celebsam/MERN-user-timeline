@@ -26,7 +26,7 @@ const registerUser = async (req, res) => {
                token: generateToken(user._id),
             });
          } else {
-            res.status(400).json({ message: "user creation failed" });
+            res.status(400).json({ message: "user creation failed." });
          }
       } catch (error) {
          res.send(error);

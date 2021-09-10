@@ -8,6 +8,7 @@ const Register = () => {
    const [password, setPassword] = useState("");
    const [firstname, setFirstname] = useState("");
    const [lastname, setLastname] = useState("");
+   const [picture, setPicture] = useState("");
    // const [message, setMessage] = useState("");
 
    const register = useSelector((state) => state.register);
@@ -18,7 +19,30 @@ const Register = () => {
 
    const registerHandler = (e) => {
       e.preventDefault();
-      dispatch(registerAction({ firstname, lastname, email, password }));
+      dispatch(
+         registerAction({ firstname, lastname, email, password, picture })
+      );
+   };
+
+   const pictureHandler = (chosenPic) => {
+      if (!chosenPic) {
+         // return setPicMessage("Please select an image");
+         return console.log("Please select an image");
+      }
+      const data = new FormData();
+      data.append("file", chosenPic);
+      data.append("upload_preset", "timeline");
+      data.append("cloud_name", "samgreen");
+      fetch("https://api.cloudinary.com/v1_1/samgreen/image/upload", {
+         method: "post",
+         body: data,
+      })
+         .then((response) => response.json())
+         .then((data) => {
+            console.log(data);
+            setPicture(data?.url?.toString());
+         })
+         .catch((err) => console.log(err));
    };
 
    return (
@@ -27,7 +51,7 @@ const Register = () => {
             <h1 className="mt-3">Register</h1>
             {/* {message && message} */}
             <Form style={{ width: "60%", margin: "auto" }}>
-               <Form.Group className="mb-3" controlId="formBasicEmail">
+               <Form.Group className="mb-3" controlId="formBasicFirstname">
                   <Form.Label>Firstname</Form.Label>
                   <Form.Control
                      value={firstname}
@@ -36,7 +60,7 @@ const Register = () => {
                      onChange={(e) => setFirstname(e.target.value)}
                   />
                </Form.Group>
-               <Form.Group className="mb-3" controlId="formBasicEmail">
+               <Form.Group className="mb-3" controlId="formBasicLastname">
                   <Form.Label>Lastname</Form.Label>
                   <Form.Control
                      value={lastname}
@@ -54,7 +78,6 @@ const Register = () => {
                      onChange={(e) => setEmail(e.target.value)}
                   />
                </Form.Group>
-
                <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
@@ -64,6 +87,17 @@ const Register = () => {
                      onChange={(e) => setPassword(e.target.value)}
                   />
                </Form.Group>
+               <Form.Group className="mb-3">
+                  <Form.Label>Profile Picture</Form.Label>
+                  <Form.Control
+                     type="file"
+                     onChange={(e) => pictureHandler(e.target.files[0])}
+                     id="custom-file"
+                     // type="image/png"
+                     label=""
+                  />
+               </Form.Group>
+
                {loading ? (
                   <Spinner
                      animation="border"
@@ -83,7 +117,7 @@ const Register = () => {
                      type="submit"
                      onClick={registerHandler}
                   >
-                     Login
+                     Register
                   </Button>
                )}
             </Form>
