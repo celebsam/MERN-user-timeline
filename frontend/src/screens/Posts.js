@@ -7,7 +7,7 @@ const Posts = () => {
    const post = useSelector((state) => state.post);
 
    const { loading, posts } = post;
-   console.log(posts);
+   // console.log(posts);
    const dispatch = useDispatch();
    useEffect(() => {
       dispatch(getPost());
