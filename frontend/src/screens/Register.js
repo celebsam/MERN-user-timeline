@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Container, Form, Spinner } from "react-bootstrap";
 import { registerAction } from "../redux/actions/userActions";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Register = () => {
    const [email, setEmail] = useState("");
@@ -13,15 +15,20 @@ const Register = () => {
 
    const register = useSelector((state) => state.register);
 
-   const { loading } = register;
+   const { loading, error } = register;
+   console.log(error);
 
    const dispatch = useDispatch();
+   const history = useHistory();
 
    const registerHandler = (e) => {
       e.preventDefault();
       dispatch(
          registerAction({ firstname, lastname, email, password, picture })
       );
+      // if (!error) {
+      //    history.push("/login");
+      // }
    };
 
    const pictureHandler = (chosenPic) => {
@@ -121,6 +128,11 @@ const Register = () => {
                   </Button>
                )}
             </Form>
+
+            <br />
+            <p>
+               Have an account? <Link to="/login"> Login here</Link>
+            </p>
          </Container>
       </div>
    );

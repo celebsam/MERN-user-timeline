@@ -14,9 +14,9 @@ export const registerReducer = (state = { registerInfo: {} }, action) => {
    if (action.type === "REGISTER_REQUEST") {
       return { loading: true, registerInfo: {} };
    } else if (action.type === "REGISTER_REQUEST_SUCCESS") {
-      return { loading: false, success: true, registerInfo: action.payload };
-   } else if (action.type === "REGISTER_REQUEST_FAIL") {
       return { loading: false, registerInfo: action.payload };
+   } else if (action.type === "REGISTER_REQUEST_FAIL") {
+      return { loading: false, error: action.payload };
    } else {
       return state;
    }

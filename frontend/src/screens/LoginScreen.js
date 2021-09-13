@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Container, Form, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../redux/actions/userActions";
+import { Link } from "react-router-dom";
 
 const LoginScreen = () => {
    const [email, setEmail] = useState("");
@@ -66,6 +67,9 @@ const LoginScreen = () => {
                </Button>
             )}
          </Form>
+         <p>
+            Don't have an account? <Link to="/register"> Register here</Link>
+         </p>
       </Container>
    );
 };

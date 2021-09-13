@@ -10,7 +10,7 @@ const registerUser = async (req, res) => {
 
    const exist = await User.findOne({ email: req.body.email });
    if (exist) {
-      res.status(400).send("The email already exist");
+      return res.status(400).send("The email already exist");
    } else {
       try {
          const user = new User(req.body);

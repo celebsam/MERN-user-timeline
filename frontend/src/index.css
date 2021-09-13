@@ -10,3 +10,10 @@ img {
 input {
    color: white !important;
 }
+
+a {
+   text-decoration: none !important;
+}
+main {
+   min-height: 85vh;
+}
