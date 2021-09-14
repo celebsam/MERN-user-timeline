@@ -1,6 +1,7 @@
+const asyncHandler = require("express-async-handler");
 const Post = require("../models/postModels");
 
-const getPosts = async (req, res) => {
+const getPosts = asyncHandler(async (req, res) => {
    try {
       const posts = await Post.find().populate("user");
       if (!posts) {
@@ -11,8 +12,7 @@ const getPosts = async (req, res) => {
    } catch (error) {
       res.status(500).send(error.message);
    }
-};
-
+});
 const createPost = async (req, res) => {
    try {
       const post = new Post({ ...req.body, user: req.user.id });

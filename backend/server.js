@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const postRoutes = require("./routes/postRoutes");
 const userRoutes = require("./routes/userRoutes");
+const errorMiddleware = require("./utils/error");
 
 const app = express();
 dotenv.config();
@@ -20,6 +21,8 @@ app.use(express.json());
 
 app.use("/api/post", postRoutes);
 app.use("/api/user", userRoutes);
+
+app.use(errorMiddleware);
 
 const PORT = process.env.PORT || 5000;
 
