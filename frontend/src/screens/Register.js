@@ -4,7 +4,7 @@ import { Alert, Button, Container, Form, Spinner } from "react-bootstrap";
 import { registerAction } from "../redux/actions/userActions";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Register = () => {
    const [email, setEmail] = useState("");
@@ -16,11 +16,11 @@ const Register = () => {
 
    const register = useSelector((state) => state.register);
 
-   const { loading, error } = register;
-   console.log(error);
+   const { loading, error, success } = register;
+   console.log(success);
 
    const dispatch = useDispatch();
-   // const history = useHistory();
+   const history = useHistory();
 
    const registerHandler = (e) => {
       e.preventDefault();
@@ -35,10 +35,12 @@ const Register = () => {
             progress: undefined,
          });
       }
-      dispatch(registerAction(firstname, lastname, email, password, picture));
-      // if (!error) {
-      //    history.push("/login");
-      // }
+      dispatch(
+         registerAction({ firstname, lastname, email, password, picture })
+      );
+      if (success) {
+         history.push("/login");
+      }
    };
 
    const pictureHandler = (chosenPic) => {

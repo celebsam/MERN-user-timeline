@@ -3,18 +3,18 @@ import { Button, Container, Form, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../redux/actions/userActions";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 const LoginScreen = () => {
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const [message, setMessage] = useState("");
 
-   const history = useHistory();
+   // const history = useHistory();
 
    const login = useSelector((state) => state.login);
 
-   const { loading, error } = login;
+   const { loading } = login;
 
    const dispatch = useDispatch();
 
@@ -25,9 +25,9 @@ const LoginScreen = () => {
          return setMessage("Values entered are too small");
       }
       dispatch(loginAction({ email, password }));
-      if (!error) {
-         history.push("/posts");
-      }
+      // if (!error) {
+      //    history.push("/posts");
+      // }
    };
 
    return (
