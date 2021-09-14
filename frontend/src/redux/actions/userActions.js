@@ -25,22 +25,27 @@ export const loginAction = (loginInfo) => async (dispatch) => {
    }
 };
 
-export const registerAction = (userDetails) => async (dispatch) => {
-   try {
-      dispatch({ type: "REGISTER_REQUEST" });
+export const registerAction =
+   (firstname, lastname, email, password, picture) => async (dispatch) => {
+      try {
+         dispatch({ type: "REGISTER_REQUEST" });
 
-      const config = { headers: { "Content-Type": "application/json" } };
+         const config = { headers: { "Content-Type": "application/json" } };
 
-      const { data } = axios.post("/api/user/register", userDetails, config);
+         const { data } = axios.post(
+            "/api/user/register",
+            { firstname, lastname, email, password, picture },
+            config
+         );
 
-      dispatch({ type: "REGISTER_REQUEST_SUCCESS", payload: data });
-   } catch (error) {
-      dispatch({
-         type: "REGISTER_REQUEST_FAIL",
-         payload:
-            error.response && error.response.data.message
-               ? error.response.data.message
-               : error.message,
-      });
-   }
-};
+         dispatch({ type: "USER_REGISTER_FAIL", payload: data });
+      } catch (error) {
+         dispatch({
+            type: "REGISTER_REQUEST_FAIL",
+            payload:
+               error.response && error.response.data.message
+                  ? error.response.data.message
+                  : error.message,
+         });
+      }
+   };

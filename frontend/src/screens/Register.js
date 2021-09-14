@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Container, Form, Spinner } from "react-bootstrap";
+import { Alert, Button, Container, Form, Spinner } from "react-bootstrap";
 import { registerAction } from "../redux/actions/userActions";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -35,9 +35,7 @@ const Register = () => {
             progress: undefined,
          });
       }
-      dispatch(
-         registerAction({ firstname, lastname, email, password, picture })
-      );
+      dispatch(registerAction(firstname, lastname, email, password, picture));
       // if (!error) {
       //    history.push("/login");
       // }
@@ -68,6 +66,8 @@ const Register = () => {
       <div>
          <Container>
             <h1 className="mt-3">Register</h1>
+            {error && <Alert variant="danger">{error}</Alert>}
+
             <Form style={{ width: "60%", margin: "auto" }}>
                <Form.Group className="mb-3" controlId="formBasicFirstname">
                   <Form.Label>Firstname</Form.Label>
