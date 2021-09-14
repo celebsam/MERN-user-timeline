@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Button, Container, Form, Spinner } from "react-bootstrap";
 import { registerAction } from "../redux/actions/userActions";
@@ -22,6 +22,17 @@ const Register = () => {
    const dispatch = useDispatch();
    const history = useHistory();
 
+   useEffect(() => {
+      if (success) {
+         toast.success("Registration successful. You can login.", {
+            position: "top-center",
+         });
+         setTimeout(() => {
+            history.push("/login");
+         }, 2000);
+      }
+   }, [history, success]);
+
    const registerHandler = (e) => {
       e.preventDefault();
       if (!email || !password || !firstname || !lastname) {
@@ -38,9 +49,6 @@ const Register = () => {
       dispatch(
          registerAction({ firstname, lastname, email, password, picture })
       );
-      if (success) {
-         history.push("/login");
-      }
    };
 
    const pictureHandler = (chosenPic) => {
