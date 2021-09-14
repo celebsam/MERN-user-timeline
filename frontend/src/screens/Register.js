@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Container, Form, Spinner } from "react-bootstrap";
 import { registerAction } from "../redux/actions/userActions";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 // import { useHistory } from "react-router-dom";
 
 const Register = () => {
@@ -11,7 +12,7 @@ const Register = () => {
    const [firstname, setFirstname] = useState("");
    const [lastname, setLastname] = useState("");
    const [picture, setPicture] = useState("");
-   const [message, setMessage] = useState("");
+   // const [message, setMessage] = useState("");
 
    const register = useSelector((state) => state.register);
 
@@ -24,7 +25,15 @@ const Register = () => {
    const registerHandler = (e) => {
       e.preventDefault();
       if (!email || !password || !firstname || !lastname) {
-         return setMessage("Please enter all fields.");
+         return toast.error("Fill in all the fields.", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+         });
       }
       dispatch(
          registerAction({ firstname, lastname, email, password, picture })
@@ -59,7 +68,6 @@ const Register = () => {
       <div>
          <Container>
             <h1 className="mt-3">Register</h1>
-            {message && message}
             <Form style={{ width: "60%", margin: "auto" }}>
                <Form.Group className="mb-3" controlId="formBasicFirstname">
                   <Form.Label>Firstname</Form.Label>
