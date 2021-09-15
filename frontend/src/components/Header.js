@@ -2,14 +2,23 @@ import React from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../redux/actions/userActions";
+import { useHistory } from "react-router-dom";
 
 const Header = () => {
+   const dispatch = useDispatch();
+   const history = useHistory();
+
    const login = useSelector((state) => state.login);
 
    const { userInfo } = login;
 
    const logoutHandler = () => {
-      console.log("logged out");
+      dispatch(logout());
+
+      setTimeout(() => {
+         history.push("/");
+      }, 1000);
    };
    return (
       <Navbar style={{ padding: "1rem 2rem" }} bg="light" expand="lg">
@@ -27,15 +36,19 @@ const Header = () => {
                      <Nav.Link href="/posts">Posts</Nav.Link>
                   </LinkContainer>
                )}
-
-               <NavDropdown title="Sam Green" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">
-                     Profile
-                  </NavDropdown.Item>
-                  <NavDropdown.Item onClick={logoutHandler}>
-                     Logout
-                  </NavDropdown.Item>
-               </NavDropdown>
+               {!userInfo ? null : (
+                  <NavDropdown
+                     title={userInfo?.firstname + " " + userInfo?.lastname}
+                     id="basic-nav-dropdown"
+                  >
+                     <NavDropdown.Item href="#action/3.1">
+                        Profile
+                     </NavDropdown.Item>
+                     <NavDropdown.Item onClick={logoutHandler}>
+                        Logout
+                     </NavDropdown.Item>
+                  </NavDropdown>
+               )}
             </Nav>
          </Navbar.Collapse>
       </Navbar>
