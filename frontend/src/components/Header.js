@@ -1,12 +1,16 @@
 import React from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const Header = () => {
    const login = useSelector((state) => state.login);
 
    const { userInfo } = login;
+
+   const logoutHandler = () => {
+      console.log("logged out");
+   };
    return (
       <Navbar style={{ padding: "1rem 2rem" }} bg="light" expand="lg">
          <LinkContainer to="/">
@@ -28,7 +32,9 @@ const Header = () => {
                   <NavDropdown.Item href="#action/3.1">
                      Profile
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">Logout</NavDropdown.Item>
+                  <NavDropdown.Item onClick={logoutHandler}>
+                     Logout
+                  </NavDropdown.Item>
                </NavDropdown>
             </Nav>
          </Navbar.Collapse>
