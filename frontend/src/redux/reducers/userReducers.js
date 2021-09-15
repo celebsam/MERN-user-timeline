@@ -5,6 +5,8 @@ export const loginReducer = (state = { userInfo: {} }, action) => {
       return { loading: false, success: true, userInfo: action.payload };
    } else if (action.type === "LOGIN_REQUEST_FAIL") {
       return { loading: false, success: false, error: action.payload };
+   } else if (action.type === "LOGOUT_REQUEST") {
+      return {};
    } else {
       return state;
    }

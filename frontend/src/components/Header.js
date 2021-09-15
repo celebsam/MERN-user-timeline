@@ -18,11 +18,11 @@ const Header = () => {
                <LinkContainer to="/">
                   <Nav.Link href="/">Home</Nav.Link>
                </LinkContainer>
-               {userInfo ? (
+               {!userInfo ? null : (
                   <LinkContainer to="/posts">
                      <Nav.Link href="/posts">Posts</Nav.Link>
                   </LinkContainer>
-               ) : null}
+               )}
 
                <NavDropdown title="Sam Green" id="basic-nav-dropdown">
                   <NavDropdown.Item href="#action/3.1">
