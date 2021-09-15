@@ -1,8 +1,12 @@
 import React from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+   const login = useSelector((state) => state.login);
+
+   const { userInfo } = login;
    return (
       <Navbar style={{ padding: "1rem 2rem" }} bg="light" expand="lg">
          <LinkContainer to="/">
@@ -14,9 +18,12 @@ const Header = () => {
                <LinkContainer to="/">
                   <Nav.Link href="/">Home</Nav.Link>
                </LinkContainer>
-               <LinkContainer to="/posts">
-                  <Nav.Link href="/posts">Posts</Nav.Link>
-               </LinkContainer>
+               {userInfo ? (
+                  <LinkContainer to="/posts">
+                     <Nav.Link href="/posts">Posts</Nav.Link>
+                  </LinkContainer>
+               ) : null}
+
                <NavDropdown title="Sam Green" id="basic-nav-dropdown">
                   <NavDropdown.Item href="#action/3.1">
                      Profile
