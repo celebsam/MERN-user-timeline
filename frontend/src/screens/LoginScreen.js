@@ -1,22 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Container, Form, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../redux/actions/userActions";
 import { Link } from "react-router-dom";
-// import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 const LoginScreen = () => {
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const [message, setMessage] = useState("");
 
-   // const history = useHistory();
+   const history = useHistory();
 
    const login = useSelector((state) => state.login);
 
-   const { loading } = login;
+   const { loading, success } = login;
 
    const dispatch = useDispatch();
+
+   useEffect(() => {
+      if (success) {
+         toast.success("Login successful.", {
+            position: "top-center",
+         });
+         setTimeout(() => {
+            history.push("/posts");
+         }, 2000);
+      }
+   }, [history, success]);
 
    const loginHandler = (e) => {
       e.preventDefault();
