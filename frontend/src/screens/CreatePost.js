@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import { Container, Form, Spinner, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { createPostAction } from "../redux/actions/postActions";
 // import { Link } from "react-router-dom";
 
 const CreatePost = () => {
    const [title, setTitle] = useState("");
    const [image, setImage] = useState("");
    const [description, setDescription] = useState("");
-   const [loading, setLoading] = useState(false);
+
+   const dispatch = useDispatch();
+   const createPost = useSelector((state) => state.createPost);
+
+   const { loading } = createPost;
 
    const postHandler = (e) => {
       e.preventDefault();
-      console.log("Clicked");
+      dispatch(createPostAction({ title, image, description }));
    };
 
    const imageHandler = (chosenPic) => {
