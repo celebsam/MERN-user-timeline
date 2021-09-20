@@ -1,5 +1,5 @@
 import axios from "axios";
-import { config } from "dotenv";
+
 export const getPost = () => async (dispatch) => {
    try {
       dispatch({ type: "GET_POST_REQUEST" });
@@ -27,18 +27,17 @@ export const createPostAction = (postInfo) => async (dispatch, getState) => {
       console.log(token);
       console.log(_id);
 
+      const details = { ...postInfo, user: _id };
+      console.log(details);
+
       const config = {
-         header: {
+         headers: {
             "Content-Type": "application/json",
             authorization: token,
          },
       };
 
-      const { data } = await axios.post(
-         "/api/post",
-         { ...postInfo, user: _id },
-         config
-      );
+      const { data } = await axios.post("/api/post", details, config);
 
       dispatch({ type: "CREATE_POST_SUCCESS", payload: data });
    } catch (error) {
