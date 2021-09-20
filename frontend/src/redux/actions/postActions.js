@@ -24,11 +24,8 @@ export const createPostAction = (postInfo) => async (dispatch, getState) => {
       const user = getState().login.userInfo;
 
       const { _id, token } = user;
-      console.log(token);
-      console.log(_id);
 
       const details = { ...postInfo, user: _id };
-      console.log(details);
 
       const config = {
          headers: {
