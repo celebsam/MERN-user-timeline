@@ -13,6 +13,7 @@ const getPosts = asyncHandler(async (req, res) => {
       res.status(500).send(error.message);
    }
 });
+
 const createPost = async (req, res) => {
    try {
       const post = new Post({ ...req.body, user: req.user.id });

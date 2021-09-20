@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Card, Container, Button, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getPost } from "../redux/actions/postActions";
+import { Link } from "react-router-dom";
 
 const Posts = () => {
    const post = useSelector((state) => state.post);
@@ -28,6 +29,8 @@ const Posts = () => {
    ) : (
       <Container>
          <h1 className="mt-3">Posts</h1>
+         <Link to="/create">Create Post</Link>
+         <br />
 
          <div
             style={{
