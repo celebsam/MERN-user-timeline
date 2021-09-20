@@ -15,3 +15,5 @@ export const getPost = () => async (dispatch) => {
       });
    }
 };
+
+const createPostAction = (postInfo) => async (dispatch, getState) => {};

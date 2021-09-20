@@ -13,8 +13,25 @@ const CreatePost = () => {
       console.log("Clicked");
    };
 
-   const imageHandler = () => {
-      console.log("clicked");
+   const imageHandler = (chosenPic) => {
+      if (!chosenPic) {
+         // return setPicMessage("Please select an image");
+         return console.log("Please select an image");
+      }
+      const data = new FormData();
+      data.append("file", chosenPic);
+      data.append("upload_preset", "timeline");
+      data.append("cloud_name", "samgreen");
+      fetch("https://api.cloudinary.com/v1_1/samgreen/image/upload", {
+         method: "post",
+         body: data,
+      })
+         .then((response) => response.json())
+         .then((data) => {
+            console.log(data);
+            setImage(data?.url?.toString());
+         })
+         .catch((err) => console.log(err));
    };
 
    return (
