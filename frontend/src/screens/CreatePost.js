@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Form, Spinner, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const CreatePost = () => {
    const [title, setTitle] = useState("");
@@ -11,6 +11,10 @@ const CreatePost = () => {
    const postHandler = (e) => {
       e.preventDefault();
       console.log("Clicked");
+   };
+
+   const imageHandler = () => {
+      console.log("clicked");
    };
 
    return (
@@ -28,15 +32,27 @@ const CreatePost = () => {
                />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicImage">
+            <Form.Group className="mb-3">
                <Form.Label>Image</Form.Label>
                <Form.Control
-                  value={image}
-                  type="password"
-                  placeholder="Password"
-                  onChange={(e) => setImage(e.target.value)}
+                  type="file"
+                  onChange={(e) => imageHandler(e.target.files[0])}
+                  id="custom-file"
+                  // type="image/png"
+                  label=""
                />
             </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicDescription">
+               <Form.Label>Description</Form.Label>
+               <Form.Control
+                  value={description}
+                  type="text"
+                  placeholder="Description"
+                  onChange={(e) => setDescription(e.target.value)}
+               />
+            </Form.Group>
+
             {loading ? (
                <Spinner
                   animation="border"
@@ -52,7 +68,7 @@ const CreatePost = () => {
                </Spinner>
             ) : (
                <Button variant="primary" type="submit" onClick={postHandler}>
-                  Login
+                  Submit
                </Button>
             )}
          </Form>
