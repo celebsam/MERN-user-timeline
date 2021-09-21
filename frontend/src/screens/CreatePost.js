@@ -1,3 +1,4 @@
+import { set } from "mongoose";
 import React, { useState } from "react";
 import { Container, Form, Spinner, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +9,7 @@ const CreatePost = () => {
    const [title, setTitle] = useState("");
    const [image, setImage] = useState("");
    const [description, setDescription] = useState("");
+   const [picLoading, setPicLoading] = useState(false);
 
    const dispatch = useDispatch();
    const createPost = useSelector((state) => state.createPost);
@@ -20,6 +22,7 @@ const CreatePost = () => {
    };
 
    const imageHandler = (chosenPic) => {
+      setPicLoading(true);
       if (!chosenPic) {
          // return setPicMessage("Please select an image");
          return console.log("Please select an image");
@@ -35,6 +38,7 @@ const CreatePost = () => {
          .then((response) => response.json())
          .then((data) => {
             console.log(data);
+            setPicLoading(false);
             setImage(data?.url?.toString());
          })
          .catch((err) => console.log(err));
@@ -65,6 +69,19 @@ const CreatePost = () => {
                   label=""
                />
             </Form.Group>
+            {picLoading ? (
+               <Spinner
+                  animation="border"
+                  role="status"
+                  style={{
+                     width: "20px",
+                     height: "20px",
+                     display: "block",
+                  }}
+               >
+                  <span className="visually-hidden">Loading...</span>
+               </Spinner>
+            ) : null}
 
             <Form.Group className="mb-3" controlId="formBasicDescription">
                <Form.Label>Description</Form.Label>
@@ -90,7 +107,12 @@ const CreatePost = () => {
                   <span className="visually-hidden">Loading...</span>
                </Spinner>
             ) : (
-               <Button variant="primary" type="submit" onClick={postHandler}>
+               <Button
+                  disabled={picLoading}
+                  variant="primary"
+                  type="submit"
+                  onClick={postHandler}
+               >
                   Submit
                </Button>
             )}
