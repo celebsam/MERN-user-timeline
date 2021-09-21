@@ -4,8 +4,11 @@ const mongoose = require("mongoose");
 const postRoutes = require("./routes/postRoutes");
 const userRoutes = require("./routes/userRoutes");
 const errorMiddleware = require("./utils/error");
+var cors = require("cors");
 
 const app = express();
+app.use(cors());
+
 dotenv.config();
 
 mongoose

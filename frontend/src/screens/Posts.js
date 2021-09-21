@@ -31,6 +31,7 @@ const Posts = () => {
          <h1 className="mt-3">Posts</h1>
          <Link to="/create">Create Post</Link>
          <br />
+         <br />
 
          <div
             style={{
