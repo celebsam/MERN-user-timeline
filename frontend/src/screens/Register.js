@@ -53,7 +53,6 @@ const Register = () => {
 
    const pictureHandler = (chosenPic) => {
       if (!chosenPic) {
-         // return setPicMessage("Please select an image");
          return console.log("Please select an image");
       }
       const data = new FormData();
