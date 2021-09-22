@@ -11,11 +11,19 @@ const reducers = combineReducers({
    createPost: createPostReducer,
 });
 
+const userInfoFromStorage = localStorage.getItem("timelineUserInfo")
+   ? JSON.parse(localStorage.getItem("timelineUserInfo"))
+   : null;
+
+const initialState = {
+   login: { userInfo: userInfoFromStorage },
+};
+
 const middleware = [thunk];
 
 const store = createStore(
    reducers,
-   {},
+   initialState,
    composeWithDevTools(applyMiddleware(...middleware))
 );
 

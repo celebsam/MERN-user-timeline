@@ -54,6 +54,6 @@ export const registerAction = (registerInfo) => async (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
-   localStorage.removeItem("userInfo");
+   localStorage.removeItem("timelineUserInfo");
    dispatch({ type: "LOGOUT_REQUEST" });
 };
