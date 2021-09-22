@@ -25,7 +25,18 @@ const createPost = async (req, res) => {
 };
 
 const deletePost = async (req, res) => {
-   res.send("The post has been deleted");
+   const id = req.params.id;
+   try {
+      const post = await Post.findById(id);
+      if (!post) {
+         return res.status(404).json({ message: "Post not found" });
+      } else {
+         await Post.deleteOne({ _id: id });
+         res.json({ message: "Post deleted successfully" });
+      }
+   } catch (error) {
+      res.status(500).send(error.message);
+   }
 };
 
 module.exports = { getPosts, createPost, deletePost };
