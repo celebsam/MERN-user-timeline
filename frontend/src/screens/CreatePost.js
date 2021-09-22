@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Form, Spinner, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { createPostAction } from "../redux/actions/postActions";
+import { useHistory } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 const CreatePost = () => {
@@ -10,15 +12,28 @@ const CreatePost = () => {
    const [description, setDescription] = useState("");
    const [picLoading, setPicLoading] = useState(false);
 
+   const history = useHistory();
+
    const dispatch = useDispatch();
    const createPost = useSelector((state) => state.createPost);
 
-   const { loading } = createPost;
+   const { loading, success } = createPost;
 
    const postHandler = (e) => {
       e.preventDefault();
       dispatch(createPostAction({ title, image, description }));
    };
+
+   useEffect(() => {
+      if (success) {
+         toast.success("Login successful.", {
+            position: "top-center",
+         });
+         setTimeout(() => {
+            history.push("/posts");
+         }, 2000);
+      }
+   }, [history, success]);
 
    const imageHandler = (chosenPic) => {
       setPicLoading(true);
