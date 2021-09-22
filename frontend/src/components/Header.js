@@ -22,13 +22,13 @@ const Header = () => {
    };
    return (
       <Navbar style={{ padding: "1rem 2rem" }} bg="light" expand="lg">
-         <LinkContainer to="/">
+         <LinkContainer to={!userInfo ? "/" : "/posts"}>
             <Navbar.Brand>Timeline</Navbar.Brand>
          </LinkContainer>
          <Navbar.Toggle aria-controls="basic-navbar-nav" />
          <Navbar.Collapse id="basic-navbar-nav">
             <Nav style={{ marginLeft: "auto" }} className="ml-auto">
-               <LinkContainer to="/">
+               <LinkContainer to={!userInfo ? "/" : "/posts"}>
                   <Nav.Link href="/">Home</Nav.Link>
                </LinkContainer>
                {!userInfo ? null : (
