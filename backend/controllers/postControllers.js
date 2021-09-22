@@ -24,4 +24,8 @@ const createPost = async (req, res) => {
    }
 };
 
-module.exports = { getPosts, createPost };
+const deletePost = async (req, res) => {
+   res.send("The post has been deleted");
+};
+
+module.exports = { getPosts, createPost, deletePost };
