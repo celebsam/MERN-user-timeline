@@ -26,7 +26,7 @@ const CreatePost = () => {
 
    useEffect(() => {
       if (success) {
-         toast.success("Login successful.", {
+         toast.success("Post created.", {
             position: "top-center",
          });
          setTimeout(() => {
