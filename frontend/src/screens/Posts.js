@@ -47,9 +47,11 @@ const Posts = () => {
                      <Card.Title>{post.title}</Card.Title>
                      <Card.Text>{post.description}</Card.Text>
                      <Card.Text>
-                        By
                         {post.user
-                           ? post.user.firstname + " " + post.user.lastname
+                           ? "By " +
+                             post.user.firstname +
+                             " " +
+                             post.user.lastname
                            : ""}
                      </Card.Text>
 
