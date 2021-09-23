@@ -54,8 +54,9 @@ const Posts = () => {
                              post.user.lastname
                            : ""}
                      </Card.Text>
-
-                     <Button variant="primary">More details.</Button>
+                     <Link to={`/single-post/${post._id}`}>
+                        <Button variant="primary">More details.</Button>
+                     </Link>
                   </Card.Body>
                </Card>
             ))}

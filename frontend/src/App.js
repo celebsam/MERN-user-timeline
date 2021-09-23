@@ -9,6 +9,7 @@ import Posts from "./screens/Posts";
 import LoginScreen from "./screens/LoginScreen";
 import Register from "./screens/Register";
 import CreatePost from "./screens/CreatePost";
+import SinglePost from "./screens/SinglePost";
 
 function App() {
    return (
@@ -18,6 +19,7 @@ function App() {
             <Header />
             <main>
                <Route path="/create" exact component={CreatePost} />
+               <Route path="/single-post/:id" exact component={SinglePost} />
                <Route path="/register" exact component={Register} />
                <Route exact path="/posts" component={Posts} />
                <Route exact path="/login" component={LoginScreen} />

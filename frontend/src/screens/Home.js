@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Home = () => {
+   const login = useSelector((state) => state.login);
+
+   const history = useHistory();
+
+   useEffect(() => {
+      if (login.userInfo) {
+         history.push("/posts");
+      }
+   }, [login, history]);
    return (
       <div
          style={{
