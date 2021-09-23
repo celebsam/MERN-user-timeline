@@ -20,3 +20,14 @@ export const createPostReducer = (state = { post: {} }, action) => {
       return state;
    }
 };
+export const singlePostReducer = (state = { singlePost: {} }, action) => {
+   if (action.type === "SINGLE_POST_REQUEST") {
+      return { loading: true, singlePost: {} };
+   } else if (action.type === "SINGLE_POST_SUCCESS") {
+      return { loading: false, success: true, singlePost: action.payload };
+   } else if (action.type === "SINGLE_POST_FAIL") {
+      return { loading: false, success: false, error: action.payload };
+   } else {
+      return state;
+   }
+};

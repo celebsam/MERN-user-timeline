@@ -47,3 +47,21 @@ export const createPostAction = (postInfo) => async (dispatch, getState) => {
       });
    }
 };
+
+export const singlePostAction = (id) => async (dispatch) => {
+   try {
+      dispatch({ type: "SINGLE_POST_REQUEST" });
+
+      const { data } = await axios.get(`/api/post/single-post/${id}`);
+
+      dispatch({ type: "SINGLE_POST_SUCCESS", payload: data });
+   } catch (error) {
+      dispatch({
+         type: "SINGLE_POST_FAIL",
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
+      });
+   }
+};

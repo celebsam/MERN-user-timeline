@@ -12,6 +12,6 @@ const router = express.Router();
 router.get("/", getPosts);
 router.post("/", protect, createPost);
 router.delete("/:id", deletePost);
-router.get("/delete/:id", getPostById);
+router.get("/single-post/:id", getPostById);
 
 module.exports = router;

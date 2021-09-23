@@ -1,7 +1,11 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { createPostReducer, postReducer } from "./reducers/postReducers";
+import {
+   createPostReducer,
+   postReducer,
+   singlePostReducer,
+} from "./reducers/postReducers";
 import { loginReducer, registerReducer } from "./reducers/userReducers";
 
 const reducers = combineReducers({
@@ -9,6 +13,7 @@ const reducers = combineReducers({
    login: loginReducer,
    register: registerReducer,
    createPost: createPostReducer,
+   singlePost: singlePostReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("timelineUserInfo")
