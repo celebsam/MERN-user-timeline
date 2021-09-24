@@ -9,6 +9,7 @@ export const postReducer = (state = { posts: [] }, action) => {
       return state;
    }
 };
+
 export const createPostReducer = (state = { post: {} }, action) => {
    if (action.type === "CREATE_POST_REQUEST") {
       return { loading: true, post: {} };
@@ -20,6 +21,7 @@ export const createPostReducer = (state = { post: {} }, action) => {
       return state;
    }
 };
+
 export const singlePostReducer = (state = { singlePost: {} }, action) => {
    if (action.type === "SINGLE_POST_REQUEST") {
       return { loading: true, singlePost: {} };
