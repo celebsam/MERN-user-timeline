@@ -33,3 +33,31 @@ export const singlePostReducer = (state = { singlePost: {} }, action) => {
       return state;
    }
 };
+
+export const deletePostReducer = (state = { message: "" }, action) => {
+   if (action.type === "DELETE_POST_REQUEST") {
+      return { loading: true, message: "" };
+   } else if (action.type === "DELETE_POST_SUCCESS") {
+      return {
+         loading: false,
+         success: true,
+         message: action.payload,
+      };
+   } else if (action.type === "DELETE_POST_FAIL") {
+      return { loading: false, success: false, error: action.payload };
+   } else {
+      return state;
+   }
+};
+
+export const updatePostReducer = (state = { updateInfo: {} }, action) => {
+   if (action.type === "UPDATE_POST_REQUEST") {
+      return { loading: true, updateInfo: {} };
+   } else if (action.type === "UPDATE_POST_SUCCESS") {
+      return { loading: false, success: true, updateInfo: action.payload };
+   } else if (action.type === "UPDATE_POST_FAIL") {
+      return { loading: false, success: false, error: action.payload };
+   } else {
+      return state;
+   }
+};

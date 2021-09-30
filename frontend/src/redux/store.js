@@ -3,8 +3,10 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import {
    createPostReducer,
+   deletePostReducer,
    postReducer,
    singlePostReducer,
+   updatePostReducer,
 } from "./reducers/postReducers";
 import { loginReducer, registerReducer } from "./reducers/userReducers";
 
@@ -14,6 +16,8 @@ const reducers = combineReducers({
    register: registerReducer,
    createPost: createPostReducer,
    singlePost: singlePostReducer,
+   deletePost: deletePostReducer,
+   updatePost: updatePostReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("timelineUserInfo")

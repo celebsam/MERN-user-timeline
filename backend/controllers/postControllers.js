@@ -43,7 +43,7 @@ const getPostById = async (req, res) => {
    const id = req.params.id;
 
    try {
-      const post = await Post.findById(id);
+      const post = await Post.findById(id).populate("user");
       if (!post) {
          res.status(404).json({ message: "Post not found." });
       } else {
@@ -54,4 +54,31 @@ const getPostById = async (req, res) => {
    }
 };
 
-module.exports = { getPosts, createPost, deletePost, getPostById };
+const updatePost = async (req, res) => {
+   const { id } = req.params;
+   try {
+      const post = await Post.findById(id);
+      if (!post) {
+         return res.status(404).json({ message: "No post was found" });
+      }
+
+      Post.findByIdAndUpdate(
+         id,
+         {
+            title: req.body.title || post.title,
+            description: req.body.description || post.description,
+         },
+         { new: true }
+      )
+         .then((post) => {
+            res.send(post);
+         })
+         .catch((err) => {
+            res.json({ message: err });
+         });
+   } catch (error) {
+      res.status(500).json({ message: "Internal server error" });
+   }
+};
+
+module.exports = { getPosts, createPost, deletePost, getPostById, updatePost };

@@ -65,3 +65,19 @@ export const singlePostAction = (id) => async (dispatch) => {
       });
    }
 };
+
+export const deletePostAction = (id) => async (dispatch) => {
+   try {
+      dispatch({ type: "DELETE_POST_REQUEST" });
+      const { data } = await axios.delete(`/api/post/${id}`);
+      dispatch({ type: "DELETE_POST_SUCCESS", payload: data });
+   } catch (error) {
+      dispatch({
+         type: "DELETE_POST_FAIL",
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
+      });
+   }
+};
