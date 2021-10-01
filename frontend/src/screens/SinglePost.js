@@ -20,6 +20,7 @@ const SinglePost = ({ match }) => {
 
    // const { message } = deletePost;
 
+   console.log(post);
    useEffect(() => {
       dispatch(singlePostAction(id));
    }, [dispatch, id]);
